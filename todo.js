@@ -130,10 +130,17 @@ function onAddItem(){
 }
 
 function onDeleteAll(){
-    for (let i = 0; i < todo_list.length; i++){
-        const item = todo_list[i];
-        console.log(item)
-    }
+
+
+    
+    // for (let i = 0; i < todo_list.length; i++){
+    //     const item = todo_list[i];
+
+    //     if (item.status === true){
+    //        // console.log(item);
+    //         remove(item.title);
+    //     }
+    // }
 }
 
 function events(){
