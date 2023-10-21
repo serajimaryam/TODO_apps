@@ -1,4 +1,5 @@
 const save_button = document.querySelector("#save-btn");
+const delete_button = document.querySelector("#delete");
 const title_input = document.querySelector("#title");
 const list = document.querySelector(".list");
 
@@ -20,9 +21,10 @@ function renderItem(todo_item){
     const span = document.createElement("span");
     span.textContent = todo_item.title;
 
-     const deleteBtn = document.createElement("button");
-     deleteBtn.classList.add("delete-btn");;
-     deleteBtn.textContent = "delete" ;
+    //<button class="delete-btn">delete</button>
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-btn");;
+    deleteBtn.textContent = "delete";
   
     item.appendChild(checkbox);
     item.appendChild(span);
@@ -36,7 +38,7 @@ function renderItem(todo_item){
     })
 
     deleteBtn.addEventListener("click", () => {
-        console.log("salam");
+        //console.log("salam");
         remove(todo_item.title);
         
     })
@@ -45,7 +47,10 @@ function renderItem(todo_item){
 }
 
 function renderList(){
+    //Remove old items
+    list.innerHTML = "";
 
+    //Render items
     for(let i=0; i < todo_list.length; i++){
         const item= todo_list[i];
         renderItem(item);
@@ -91,7 +96,6 @@ function addItem(item){
     };
     todo_list.push(next_item); 
 
-    syncStorage();
 }
 
 
@@ -106,6 +110,7 @@ function remove(val){
        syncStorage();
        renderList()
  }
+
 //Run your App
 
 function onAddItem(){
@@ -118,13 +123,23 @@ function onAddItem(){
             status: false,
          }      
          addItem(item);
+         syncStorage();
          renderItem(item);
          clearInput();
        }
 }
 
+function onDeleteAll(){
+    for (let i = 0; i < todo_list.length; i++){
+        const item = todo_list[i];
+        console.log(item)
+    }
+}
+
 function events(){
     save_button.addEventListener("click", onAddItem);
+    delete_button.addEventListener("click",onDeleteAll)
+    
 }
 
 function init(){
