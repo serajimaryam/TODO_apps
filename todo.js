@@ -2,6 +2,8 @@ const save_button = document.querySelector("#save-btn");
 const delete_button = document.querySelector("#delete");
 const title_input = document.querySelector("#title");
 const list = document.querySelector(".list");
+const item_filter = document.querySelector(".item-filter");
+
 
 let todo_list = [];
 
@@ -130,22 +132,56 @@ function onAddItem(){
 }
 
 function onDeleteAll(){
+    const new_items =todo_list.filter((item) => {
+        if (item.status === true) {
+            return false;
+        } else {
+            return true;
+        }
 
-
+    });
+     todo_list = new_items;
+     syncStorage();
+     renderList();    
     
-    // for (let i = 0; i < todo_list.length; i++){
-    //     const item = todo_list[i];
-
-    //     if (item.status === true){
-    //        // console.log(item);
-    //         remove(item.title);
-    //     }
-    // }
 }
+function onSelectedItems(){
+    const item_state = document.querySelector("option");
+    const state=item_filter.value;
+    
+    switch(state){
+        case "done":
+            const new_items = todo_list.filter((item) => {
+                if (item.status === false) {
+                    return true;
+                } else {
+                    return false;
+                }
+        
+            });
+             
+    break;
+    case "todo":
+        
+      const new_todo =todo_list.filter((item) => {
+        if (item.status === true) {
+            return false;
+        } else {
+            return true;
+        }
 
+    });
+     todo_list = new_todo;
+     
+     break;
+}
+syncStorage();
+renderList();
+}
 function events(){
     save_button.addEventListener("click", onAddItem);
-    delete_button.addEventListener("click",onDeleteAll)
+    delete_button.addEventListener("click",onDeleteAll);
+    item_filter.addEventListener("click",onSelectedItems);
     
 }
 
