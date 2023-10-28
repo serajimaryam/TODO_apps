@@ -3,6 +3,8 @@ const delete_button = document.querySelector("#delete");
 const title_input = document.querySelector("#title");
 const list = document.querySelector(".list");
 const item_filter = document.querySelector(".item-filter");
+const search_input = document.querySelector("#search");
+const search_button = document.querySelector("#search-btn");
 
 
 let todo_list = [];
@@ -145,25 +147,37 @@ function onDeleteAll(){
      renderList();    
     
 }
-function onSelectedItems(){
-    const item_state = document.querySelector("option");
-    const state=item_filter.value;
+
+function events(){
+    save_button.addEventListener("click", onAddItem);
+    delete_button.addEventListener("click",onDeleteAll);
+    item_filter.addEventListener("change",(e) => {
+      
+    console.log(e.target.value);
+    let state=e.target.value;
+    console.log(item_filter);
+    
+    let new_todo=todo_list;
     
     switch(state){
+
         case "done":
-            const new_items = todo_list.filter((item) => {
-                if (item.status === false) {
+            loadFromStorage();
+             new_todo = todo_list.filter((item) => {
+                if (item.status === true) {
                     return true;
                 } else {
                     return false;
                 }
         
             });
+            console.log(new_todo);
+            todo_list = new_todo;
              
     break;
     case "todo":
-        
-      const new_todo =todo_list.filter((item) => {
+        loadFromStorage();        
+        new_todo =todo_list.filter((item) => {
         if (item.status === true) {
             return false;
         } else {
@@ -171,17 +185,21 @@ function onSelectedItems(){
         }
 
     });
-     todo_list = new_todo;
      
+    console.log(new_todo);
+    todo_list = new_todo;
+     break;
+     
+     case "all":
+        loadFromStorage();
+        console.log(todo_list);
      break;
 }
-syncStorage();
+
+//syncStorage();
 renderList();
-}
-function events(){
-    save_button.addEventListener("click", onAddItem);
-    delete_button.addEventListener("click",onDeleteAll);
-    item_filter.addEventListener("click",onSelectedItems);
+
+    });
     
 }
 
