@@ -44,21 +44,23 @@
   <body>
     <div class="container">
       <div class="form">
+        <form id="todo-form">
         <input type="text" placeholder="Write your todo.."  id="title"/>
-        <button id="save-btn">Save</button>
+        <button type="submit" id="save-btn">Save</button>
+        </form>
         <br /><br />
-        <button id="delete">DELETE</button>
-        <br /><br />
+        <button type="button" id="delete">DELETE</button>
+        <br /><br /> 
         <input type="text" placeholder="Search"  id="search"/>
-        <button id="search-btn">Search</button>
-        <br /><br />
+        <button type="submit" id="search-btn">Search</button>
+        <br /><br />       
         Status:
         <select class="item-filter">
           <option value="done">Done</option>
           <option value="todo">Todo</option>
           <option value="all">All</option>
         </select>
-      </div>
+        </div>
       <div class="list">
         
          <!-- <div class="item">
@@ -72,6 +74,6 @@
         </div> --> 
       </div>
     </div>
-    <script type="text/javascript" src="./todo.js"></script>
+    <script type="module" src="./todo.js"></script>
   </body>
 </html>
