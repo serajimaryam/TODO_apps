@@ -4,7 +4,7 @@ export function get_todos_list(){
     return fetch(todos_api_url).then((response) => {
         return response.json();
     }).then((data) => {
-        console.log("inside",data);
+        //console.log("inside",data);
         return data;
     });
 }

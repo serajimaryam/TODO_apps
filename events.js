@@ -1,4 +1,4 @@
-import { syncStorage, loadFromStorage } from "./storage.js";
+import { syncStorage, loadFromStorage, updateDraft } from "./storage.js";
 import { renderList, renderItem, clearInput, title_input } from "./dom.js";
 import { addItem } from "./functionality.js";
 import { reset, todo_list } from "./store.js";
@@ -90,4 +90,10 @@ export function onSearchItem(event) {
       
       reset(new_items);
       renderList();
+  }
+  export function onType(eve){  
+     const char = eve.key;  
+      updateDraft(char);
+   
+
   }

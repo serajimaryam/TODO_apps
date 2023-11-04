@@ -3,7 +3,7 @@ import {todo_list, reset} from "./store.js";
 
 export function syncStorage() {
     const next_list = JSON.stringify(todo_list);
-    console.log(todo_list, next_list);
+    //console.log(todo_list, next_list);
     localStorage.setItem("my_list", next_list);
   }
   
@@ -12,3 +12,9 @@ export function loadFromStorage() {
     
     reset(listFromStorage);
   }
+
+export function updateDraft(char) {
+      const old_string = localStorage.getItem(draft_char) || "";
+      const new_string = old_string + char;
+      localStorage.setItem(draft_char, char);
+}
