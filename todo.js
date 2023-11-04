@@ -2,6 +2,7 @@ import { loadFromStorage } from "./storage.js";
 import { renderList } from "./dom.js";
 import { onAddItem, onDeleteAll, onFilterState, onSearchItem } from "./events.js";
 import { get_todos_list } from "./api/todos.js";
+import { reset } from "./store.js";
 
 
 const save_button = document.querySelector("#save-btn");
@@ -11,11 +12,6 @@ const item_filter = document.querySelector(".item-filter");
 const search_button = document.querySelector("#search-btn");
 const todo_form = document.querySelector("#todo-form");
 
-
-// function onSearchItem(event) {
-//   event.preventDefault();
-//   console.log(event);
-// }
 
 function events() {
   //save_button.addEventListener("click", onAddItem);
@@ -29,9 +25,14 @@ function events() {
 }
 
 function init() {
-  loadFromStorage();
-  get_todos_list();
-  renderList();
+  const result = get_todos_list().then((list) => {
+    console.log("out",list);
+    reset(list);
+    renderList();
+  })
+  //console.log(result);
+  // loadFromStorage();  
+  // renderList();
   events();
 }
 
