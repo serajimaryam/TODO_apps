@@ -1,6 +1,8 @@
-import { syncStorage, loadFromStorage } from "./storage.js";
-import { renderItem, renderList } from "./dom.js";
+import { loadFromStorage } from "./storage.js";
+import { renderList } from "./dom.js";
 import { onAddItem, onDeleteAll, onFilterState, onSearchItem } from "./events.js";
+import { get_todos_list } from "./api/todos.js";
+
 
 const save_button = document.querySelector("#save-btn");
 const delete_button = document.querySelector("#delete");
@@ -28,6 +30,7 @@ function events() {
 
 function init() {
   loadFromStorage();
+  get_todos_list();
   renderList();
   events();
 }
